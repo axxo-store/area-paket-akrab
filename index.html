@@ -404,7 +404,7 @@
     </table>
 
     <script>
-        function filterTable() {
+function filterTable() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const rows = document.querySelectorAll('#dataTable tr');
 
@@ -413,20 +413,23 @@
         let match = false;
 
         cells.forEach(cell => {
+            // reset previous highlight
+            cell.innerHTML = cell.textContent;
+
             const text = cell.textContent.toLowerCase();
 
-            // reset highlight
-            cell.classList.remove('highlight');
-
-            if (text.includes(input) && input !== "") {
+            if (input !== "" && text.includes(input)) {
                 match = true;
-                cell.classList.add('highlight');
+
+                // highlight ONLY matching word
+                const regex = new RegExp(`(${input})`, 'gi');
+                cell.innerHTML = cell.textContent.replace(regex, '<mark>$1</mark>');
             }
         });
 
         row.style.display = match || input === "" ? '' : 'none';
     });
-        }
+}
     </script>
 
     <style>

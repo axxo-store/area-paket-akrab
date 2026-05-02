@@ -82,6 +82,9 @@ th {
 <body>
     <h2><strong></strong>Cek Area Paket XL Akrab</strong></h2>
     <input type="text" id="searchInput" placeholder="Tuliskan Nama Provinsi atau Kab/Kota" onkeyup="filterTable()">
+    <p id="noResult" style="display:none; color:red;">
+    Data tidak ditemukan
+    </p>
 
     <table>
         <thead>
@@ -454,20 +457,23 @@ function filterTable() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const rows = document.querySelectorAll('#dataTable tr');
 
+    let found = false; // 👈 track if any result found
+
     rows.forEach(row => {
         const cells = row.querySelectorAll('td');
         let match = false;
 
         cells.forEach(cell => {
-            // reset previous highlight
+            // reset highlight
             cell.innerHTML = cell.textContent;
 
             const text = cell.textContent.toLowerCase();
 
             if (input !== "" && text.includes(input)) {
                 match = true;
+                found = true; // 👈 mark as found
 
-                // highlight ONLY matching word
+                // highlight word
                 const regex = new RegExp(`(${input})`, 'gi');
                 cell.innerHTML = cell.textContent.replace(regex, '<mark>$1</mark>');
             }
@@ -475,6 +481,10 @@ function filterTable() {
 
         row.style.display = match || input === "" ? '' : 'none';
     });
+
+    // 👇 THIS CONTROLS THE "NOT FOUND" TEXT
+    document.getElementById('noResult').style.display =
+        (found || input === "") ? 'none' : 'block';
 }
     </script>
 

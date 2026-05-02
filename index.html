@@ -82,9 +82,6 @@ th {
 <body>
     <h2><strong></strong>Cek Area Paket XL Akrab</strong></h2>
     <input type="text" id="searchInput" placeholder="Tuliskan Nama Provinsi atau Kab/Kota" onkeyup="filterTable()">
-    <p id="noResult" style="display:none; color:red;">
-    Data tidak ditemukan
-    </p>
 
     <table>
         <thead>
@@ -451,6 +448,9 @@ th {
         </tr>
         </tbody>
     </table>
+        <p id="noResult" style="display:none; color:red;">
+    Data tidak ditemukan
+        </p>
 
     <script>
 function filterTable() {

@@ -1,99 +1,150 @@
-<!DOCTYPE html><html lang="id"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXXO STORE Cek Area Paket XL Akrab</title>
-    <style>
-        /* Default (LIGHT MODE) */
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXXO STORE - Cek Area XL Akrab</title>
+
+<style>
+:root {
+    --primary: #007BFF;
+    --bg: #ffffff;
+    --text: #111;
+    --table-bg: #ffffff;
+    --border: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121212;
+        --text: #ffffff;
+        --table-bg: #1e1e1e;
+        --border: #444;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: white;
-    color: black;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* SEARCH */
+.search-box {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 16px;
+    background: var(--table-bg);
+    color: var(--text);
+}
+
+/* TABLE */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
 }
 
 table {
-    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--table-bg);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid var(--border);
+    text-align: left;
 }
 
 th {
-    background-color: #007BFF;
+    background: var(--primary);
     color: white;
-    font-weight: 600;
+    position: sticky;
+    top: 0;
 }
 
-/* DARK MODE */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: white;
-    }
-
-    table {
-        background-color: #1e1e1e;
-    }
-
-    th {
-        background-color: #0d6efd;
-    }
-
-    td {
-        border-color: #444;
-    }
-
-    input[type="text"] {
-        background-color: #1e1e1e;
-        color: white;
-        border: 1px solid #555;
-    }
-
-    mark {
-        background-color: orange;
-        color: black;
-    }
+tr:hover {
+    background: rgba(0,0,0,0.05);
 }
-        .highlight {
-    background-color: yellow;
-        }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #007BFF;
-            color: white;
-        }
-        input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            box-sizing: border-box;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-    </style>
+
+/* Highlight */
+mark {
+    background: orange;
+    color: black;
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+/* No result */
+#noResult {
+    display: none;
+    color: red;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+</style>
 </head>
-<body>
-    <h2 style="margin-top: 40px; margin-bottom: 35px;"><strong>Cek Area Paket XL Akrab</strong></h2>
-    <input type="text" id="searchInput" placeholder="⌕ Tuliskan Nama Provinsi atau Kab/Kota" onkeyup="filterTable()">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Provinsi</th>
-                <th>Kota/Kabupaten</th>
-                <th>Area</th>
-            </tr>
-        </thead>
-        <tbody id="dataTable">
-        <tr>
+<body>
+
+<div class="container">
+
+<h1>Cek Area Paket XL Akrab</h1>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="⌕ Cari Provinsi / Kota..." onkeyup="filterTable()">
+</div>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Provinsi</th>
+<th>Kota/Kabupaten</th>
+<th>Area</th>
+</tr>
+</thead>
+
+<tbody id="dataTable">
+<tr>
             <td>Banten</td>
             <td>Kota Tangerang Selatan, Kota Tangerang, Kab. Tangerang, Kab. Pandeglang, Kab. Lebak, Kab. Serang, Kota Serang, Kota Cilegon</td>
             <td>Area 2</td>
@@ -447,81 +498,53 @@ th {
             <td>Kab. Teluk Bintuni, Kab. Sorong Selatan, Kab. Sorong, Kab. Teluk Wondama, Kota Sorong, Kab. Manokwari, Kab. Fak Fak, Kab. Kaimana, Kab. Manokwari Selatan, Kab. Maybrat, Kab. Pegunungan Arfak, Kab. Raja Ampat, Kab. Tambrauw</td>
             <td>Area 1</td>
         </tr>
-        </tbody>
-    </table>
-        <p id="noResult" style="display:none; color:red; margin: 30px 0;">
-    Data tidak ditemukan
-        </p>
+</tbody>
+</table>
+</div>
 
-    <script>
+<p id="noResult">Data tidak ditemukan</p>
+
+<h2 class="order-title">ORDER PAKET AKRAB DISINI</h2>
+
+<a class="button" href="https://wa.me/6283865626030" target="_blank">
+Chat Admin
+</a>
+
+<div class="footer">©2026 AXXO STORE</div>
+
+</div>
+
+<script>
 function filterTable() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const rows = document.querySelectorAll('#dataTable tr');
 
-    let found = false; // 👈 track if any result found
+    let found = false;
 
     rows.forEach(row => {
         const cells = row.querySelectorAll('td');
         let match = false;
 
         cells.forEach(cell => {
-            // reset highlight
-            cell.innerHTML = cell.textContent;
+            const original = cell.textContent;
+            cell.innerHTML = original;
 
-            const text = cell.textContent.toLowerCase();
-
-            if (input !== "" && text.includes(input)) {
+            if (input && original.toLowerCase().includes(input)) {
                 match = true;
-                found = true; // 👈 mark as found
+                found = true;
 
-                // highlight word
                 const regex = new RegExp(`(${input})`, 'gi');
-                cell.innerHTML = cell.textContent.replace(regex, '<mark>$1</mark>');
+                cell.innerHTML = original.replace(regex, '<mark>$1</mark>');
             }
         });
 
-        row.style.display = match || input === "" ? '' : 'none';
+        row.style.display = match || !input ? '' : 'none';
     });
 
-    // 👇 THIS CONTROLS THE "NOT FOUND" TEXT
     document.getElementById('noResult').style.display =
-        (found || input === "") ? 'none' : 'block';
+        (found || !input) ? 'none' : 'block';
 }
-    </script>
+</script>
 
-    <style>
-        .subtitle {
-    font-size: 12px;      /* text size */
-    font-weight: 300;
-    margin-bottom: 40px;  /* space below */
-        }
-        body {
-            font-family: Arial;
-            text-align: center;
-        }
-
-        a {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-
-    <h2 style="margin-top: 15px;">ORDER PAKET AKRAB DISINI</h2>
-
-    <a href="https://wa.me/6283865626030" target="_blank">
-        Chat Admin
-    </a>
-    <h2 class="subtitle">©2026 AXXO STORE</h2>
-</body></html>
+</body>
+</html>

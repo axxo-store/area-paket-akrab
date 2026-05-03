@@ -618,21 +618,15 @@ mark {
 </div>
 
 <script>
-const originalCards = [];
-
-document.querySelectorAll('.card').forEach(card => {
-    originalCards.push(card.innerHTML); // store original clean HTML
-});
-
 function filterCards() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const cards = document.querySelectorAll('.card');
 
     let found = false;
 
-    cards.forEach((card, index) => {
-        // restore original HTML first (IMPORTANT)
-        card.innerHTML = originalCards[index];
+    cards.forEach(card => {
+        // remove previous highlights safely
+        removeHighlights(card);
 
         const text = card.textContent.toLowerCase();
 
@@ -640,9 +634,10 @@ function filterCards() {
             card.style.display = '';
             found = true;
 
-            if (input) {
-                highlight(card, input);
+            if (input.length > 0) {
+                highlightText(card, input);
             }
+
         } else {
             card.style.display = 'none';
         }
@@ -652,11 +647,43 @@ function filterCards() {
         (found || !input) ? 'none' : 'block';
 }
 
-// safer highlight function
-function highlight(element, keyword) {
-    const regex = new RegExp(`(${keyword})`, 'gi');
+/* 🔥 Highlight ONLY text nodes (safe) */
+function highlightText(element, keyword) {
+    const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
 
-    element.innerHTML = element.innerHTML.replace(regex, '<mark>$1</mark>');
+    const regex = new RegExp(keyword, 'gi');
+    let node;
+
+    while (node = walker.nextNode()) {
+        const parent = node.parentNode;
+
+        // skip script/style
+        if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') continue;
+
+        const text = node.nodeValue;
+        if (!regex.test(text)) continue;
+
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(regex, match => `<mark>${match}</mark>`);
+
+        parent.replaceChild(span, node);
+    }
+}
+
+/* 🧹 Clean previous highlights */
+function removeHighlights(element) {
+    const marks = element.querySelectorAll('mark');
+
+    marks.forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize(); // merge text nodes
+    });
 }
 </script>
 </body>

@@ -41,6 +41,10 @@ thead th {
     td {
         border-color: #444;
     }
+    @media (prefers-color-scheme: dark) {
+    tbody tr:nth-child(even) {
+        background-color: #2a2a2a;
+    }
 
     input[type="text"] {
         background-color: #1e1e1e;
@@ -67,6 +71,9 @@ thead th {
             border: 1px solid #ddd;
             text-align: left;
             padding: 8px;
+        }
+        tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
         }
         thead th {
     background: linear-gradient(90deg, #007BFF, #0056b3);

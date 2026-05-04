@@ -23,7 +23,11 @@ body {
     font-family: system-ui, sans-serif;
     background: linear-gradient(135deg, #020617, #0f172a);
     color: var(--text);
+    min-height: 100vh; /* 🔥 important */
 }
+    html, body {
+    min-height: 100%;
+    }
 
 /* HEADER */
 .header {
@@ -222,11 +226,22 @@ mark {
     </div>
 </div>
 
-<div class="container" id="dataContainer"></div>
+<div class="page">
 
-<p id="noResult">Data tidak ditemukan</p>
+    <div class="header glass-header">
+        ...
+    </div>
 
-<div class="footer">©2026 AXXO STORE</div>
+    <div class="container" id="dataContainer"></div>
+
+    <p id="noResult">Data tidak ditemukan</p>
+
+    <div class="footer">©2026 AXXO STORE</div>
+
+</div>
+
+<!-- WA button stays outside -->
+<div class="wa-container">...</div>
 
 <div class="wa-container">
 <a href="https://wa.me/6283865626030?text=Halo%20Admin,%20saya%20ingin%20order%20Paket%20XL%20Akrab" target="_blank" class="wa-float">

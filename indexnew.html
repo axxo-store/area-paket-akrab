@@ -303,6 +303,7 @@ function filterCards() {
             item.provinsi.toLowerCase().includes(input) ||
             item.kota.toLowerCase().includes(input)
         );
+        .slice(0, 50);
 
         renderCards(filtered, input); // 🔥 pass keyword here
 

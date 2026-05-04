@@ -250,13 +250,20 @@ fetch('data.json')
         renderCards(data);
     });
 
-function renderCards(data) {
+function highlight(text, keyword) {
+    if (!keyword) return text;
+
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+}
+
+function renderCards(data, keyword = '') {
     const container = document.getElementById('dataContainer');
 
     container.innerHTML = data.map(item => `
         <div class="card">
-            <div class="provinsi">${item.provinsi}</div>
-            <div class="kota">${item.kota}</div>
+            <div class="provinsi">${highlight(item.provinsi, keyword)}</div>
+            <div class="kota">${highlight(item.kota, keyword)}</div>
             <span class="badge">${item.area}</span>
         </div>
     `).join('');
@@ -264,19 +271,23 @@ function renderCards(data) {
 
 /* search */
 function filterCards() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
+    clearTimeout(searchTimeout);
 
-    const filtered = allData.filter(item =>
-        item.provinsi.toLowerCase().includes(input) ||
-        item.kota.toLowerCase().includes(input)
-    );
+    searchTimeout = setTimeout(() => {
+        const input = document.getElementById('searchInput').value.toLowerCase();
 
-    renderCards(filtered);
+        const filtered = allData.filter(item =>
+            item.provinsi.toLowerCase().includes(input) ||
+            item.kota.toLowerCase().includes(input)
+        );
 
-    document.getElementById('noResult').style.display =
-        (filtered.length === 0 && input) ? 'block' : 'none';
+        renderCards(filtered, input); // 🔥 pass keyword here
+
+        document.getElementById('noResult').style.display =
+            (filtered.length === 0 && input) ? 'block' : 'none';
+
+    }, 200);
 }
-
 /* header scroll animation */
 window.addEventListener('scroll', function () {
     const header = document.querySelector('.header');

@@ -238,48 +238,50 @@ mark {
 </div>
 
 <script>
-function filterCards() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
+/* ALL YOUR JS HERE */
 
-    let found = false;
+/* fetch data */
+let allData = [];
 
-    cards.forEach(card => {
-        const prov = card.querySelector('.provinsi');
-        const kota = card.querySelector('.kota');
-
-        const provText = prov.textContent;
-        const kotaText = kota.textContent;
-
-        // reset
-        prov.innerHTML = provText;
-        kota.innerHTML = kotaText;
-
-        const fullText = (provText + " " + kotaText).toLowerCase();
-
-        if (fullText.includes(input)) {
-            card.style.display = '';
-            found = true;
-
-            if (input) {
-                const regex = new RegExp(`(${input})`, 'gi');
-
-                prov.innerHTML = provText.replace(regex, '<mark>$1</mark>');
-                kota.innerHTML = kotaText.replace(regex, '<mark>$1</mark>');
-            }
-
-        } else {
-            card.style.display = 'none';
-        }
+fetch('data.json')
+    .then(res => res.json())
+    .then(data => {
+        allData = data;
+        renderCards(data);
     });
 
-    document.getElementById('noResult').style.display =
-        (found || !input) ? 'none' : 'block';
+function renderCards(data) {
+    const container = document.getElementById('dataContainer');
+    container.innerHTML = '';
+
+    data.forEach(item => {
+        container.innerHTML += `
+        <div class="card">
+            <div class="provinsi">${item.provinsi}</div>
+            <div class="kota">${item.kota}</div>
+            <span class="badge">${item.area}</span>
+        </div>`;
+    });
 }
 
+/* search */
+function filterCards() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+
+    const filtered = allData.filter(item =>
+        item.provinsi.toLowerCase().includes(input) ||
+        item.kota.toLowerCase().includes(input)
+    );
+
+    renderCards(filtered);
+
+    document.getElementById('noResult').style.display =
+        (filtered.length === 0 && input) ? 'block' : 'none';
+}
+
+/* header scroll animation */
 window.addEventListener('scroll', function () {
     const header = document.querySelector('.header');
-
     if (window.scrollY > 20) {
         header.classList.add('scrolled');
     } else {

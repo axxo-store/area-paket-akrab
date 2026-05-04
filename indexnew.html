@@ -270,6 +270,7 @@ function renderCards(data, keyword = '') {
 }
 
 /* search */
+    let searchTimeout;
 function filterCards() {
     clearTimeout(searchTimeout);
 

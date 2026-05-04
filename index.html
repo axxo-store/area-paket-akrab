@@ -28,6 +28,13 @@ body {
     html, body {
     min-height: 100%;
     }
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+    
 /* HEADER */
 .header {
     position: sticky;
@@ -110,6 +117,7 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 15px;
+    flex: 1;
 }
 
 /* CARD */
@@ -209,7 +217,8 @@ mark {
 /* FOOTER */
 .footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: auto;
+    padding: 20px 0;
     font-size: 12px;
     opacity: 0.5;
 }

@@ -252,16 +252,14 @@ fetch('data.json')
 
 function renderCards(data) {
     const container = document.getElementById('dataContainer');
-    container.innerHTML = '';
 
-    data.forEach(item => {
-        container.innerHTML += `
+    container.innerHTML = data.map(item => `
         <div class="card">
             <div class="provinsi">${item.provinsi}</div>
             <div class="kota">${item.kota}</div>
             <span class="badge">${item.area}</span>
-        </div>`;
-    });
+        </div>
+    `).join('');
 }
 
 /* search */

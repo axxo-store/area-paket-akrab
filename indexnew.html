@@ -250,10 +250,15 @@ fetch('data.json')
         renderCards(data);
     });
 
+function escapeRegex(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function highlight(text, keyword) {
     if (!keyword) return text;
 
-    const regex = new RegExp(`(${keyword})`, 'gi');
+    const safeKeyword = escapeRegex(keyword);
+    const regex = new RegExp(`(${safeKeyword})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
 }
 

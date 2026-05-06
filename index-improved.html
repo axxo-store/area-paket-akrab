@@ -481,7 +481,6 @@
             searchClear: document.getElementById('searchClear'),
             dataContainer: document.getElementById('dataContainer'),
             noResult: document.getElementById('noResult'),
-            resultsCount: document.getElementById('resultsCount'),
             loadingState: document.getElementById('loadingState'),
             errorMessage: document.getElementById('errorMessage'),
             header: document.getElementById('header'),
@@ -552,13 +551,10 @@
 
             if (data.length === 0) {
                 elements.noResult.classList.add('visible');
-                elements.resultsCount.classList.remove('visible');
                 return;
             }
 
             elements.noResult.classList.remove('visible');
-            elements.resultsCount.classList.add('visible');
-            elements.resultsCount.textContent = `Ditemukan ${data.length} hasil`;
 
             // Create fragment for better performance
             const fragment = document.createDocumentFragment();

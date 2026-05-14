@@ -89,6 +89,13 @@
             color: white;
         }
 
+        .title-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+        }
+        
         /* SEARCH CONTAINER */
         .search-box {
             margin-top: 10px;
@@ -422,7 +429,10 @@
 <body>
     <div class="page">
         <div class="header" id="header">
-            <div class="title">📡 Cek Area Paket XL Akrab</div>
+            <div class="title">
+    <img src="satellite.png" alt="Satellite Icon" class="title-icon">
+    <span>Cek Area Paket XL Akrab</span>
+</div>
             <div class="search-box" role="search">
                 <input 
                     type="text" 

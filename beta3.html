@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Cek area coverage paket XL Akrab di seluruh Indonesia - Desain soft & rounded premium">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" type="image/png" href="webicon.png">
+    <title>Cek Area XL Akrab</title>
+
+    <style>
+        /* ---------- RESET & VARIABLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Deep Navy & Gold Palette */
+            --primary: #1e3a8a;
+            --primary-dark: #172554;
+            --primary-light: #3b82f6;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --accent-light: #fbbf24;
+            
+            --success: #10b981;
+            --success-dark: #059669;
+            
+            /* Light mode */
+            --bg: #f8fafc;
+            --bg-soft: #f1f5f9;
+            --card: #ffffff;
+            --card-soft: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --subtext: #64748b;
+            --border: #e2e8f0;
+            --border-soft: #f1f5f9;
+            --error: #ef4444;
+            --error-bg: #fef2f2;
+            --mark-bg: #fef3c7;
+            --mark-text: #b45309;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 35px rgba(0, 0, 0, 0.1);
+            
+            --transition-bounce: 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+            --transition: 0.2s ease;
+            
+            --radius-sm: 0.75rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
+            --radius-2xl: 2.5rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --bg-soft: #1e293b;
+                --card: #1e293b;
+                --card-soft: #334155;
+                --text: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --subtext: #94a3b8;
+                --border: #334155;
+                --border-soft: #475569;
+                --mark-bg: #854d0e;
+                --mark-text: #fef08a;
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+                --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.25);
+                --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
+                --shadow-xl: 0 20px 35px rgba(0, 0, 0, 0.35);
+            }
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Layout */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- HEADER (Navy with Gold Accent) ---------- */
+        .header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary-dark));
+            padding: 1.5rem 1.5rem 1.8rem;
+            z-index: 20;
+            color: white;
+            transition: padding var(--transition), box-shadow var(--transition);
+            border-radius: 0 0 2rem 2rem;
+        }
+
+        .header.scrolled {
+            padding: 0.85rem 1.5rem 1.2rem;
+            box-shadow: var(--shadow-lg);
+            border-radius: 0 0 1.5rem 1.5rem;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .title-icon {
+            font-size: 1.8rem;
+        }
+
+        .title-gold {
+            color: var(--accent-light);
+            background: rgba(245, 158, 11, 0.2);
+            padding: 0.1rem 0.6rem;
+            border-radius: var(--radius-2xl);
+            font-size: 1rem;
+        }
+
+        /* Search area */
+        .search-area {
+            max-width: 550px;
+            margin: 1.5rem auto 0.5rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border-radius: var(--radius-2xl);
+            border: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.98);
+            color: var(--text);
+            transition: all var(--transition-bounce);
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-light), var(--shadow-lg);
+            transform: scale(1.01);
+        }
+
+        .search-input::placeholder {
+            color: var(--subtext);
+            font-weight: 400;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            border: none;
+            color: white;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-bounce);
+        }
+
+        .search-clear:hover {
+            transform: translateY(-50%) scale(1.05);
+            background: var(--accent-dark);
+        }
+
+        .search-clear.visible {
+            display: flex;
+        }
+
+        .search-shortcut {
+            text-align: center;
+            font-size: 0.7rem;
+            opacity: 0.85;
+            margin-top: 0.7rem;
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .search-shortcut { display: block; }
+        }
+        
+        kbd {
+            background: rgba(255,255,255,0.25);
+            padding: 0.125rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.7rem;
+        }
+
+        /* Popular searches - navy & gold chips */
+        .popular-searches {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .popular-label {
+            font-size: 0.7rem;
+            opacity: 0.85;
+            background: rgba(255,255,255,0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-2xl);
+        }
+
+        .popular-chip {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.1rem;
+            border-radius: var(--radius-2xl);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .popular-chip:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+            border-color: var(--accent-light);
+        }
+
+        /* ---------- MAIN CONTAINER ---------- */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Results count - gold accent pill */
+        .results-count {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-dark);
+            background: var(--card);
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-2xl);
+            display: none;
+            border: 1px solid var(--accent-light);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .results-count.visible { display: inline-block; }
+
+        /* Grid layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* Card design - navy border, gold accents */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            transition: all var(--transition-bounce);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        /* Gold accent line on hover */
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 3px;
+            transition: width var(--transition-bounce);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-light);
+        }
+        
+        .card:hover::after {
+            width: 70%;
+        }
+
+        .provinsi {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+
+        /* Gold badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-2xl);
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .kota {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        mark {
+            background: var(--mark-bg);
+            color: var(--mark-text);
+            border-radius: var(--radius-sm);
+            padding: 0.1rem 0.3rem;
+            font-weight: 600;
+        }
+
+        /* Skeleton loading */
+        .skeleton-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .skeleton-card {
+            background: var(--card);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .skeleton-line {
+            height: 1.2rem;
+            background: linear-gradient(90deg, var(--border) 25%, var(--border-soft) 50%, var(--border) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.8rem;
+        }
+
+        .skeleton-line.short {
+            width: 60%;
+            height: 0.85rem;
+        }
+
+        .skeleton-badge {
+            width: 4.5rem;
+            height: 1.8rem;
+            background: linear-gradient(90deg, var(--border) 25%, var(--border-soft) 50%, var(--border) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-2xl);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Error message */
+        .error-message {
+            background: var(--error-bg);
+            color: var(--error);
+            padding: 0.9rem 1.2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            border-left: 4px solid var(--error);
+        }
+        
+        .error-message.visible { display: block; }
+
+        /* No result */
+        .no-result {
+            text-align: center;
+            padding: 3rem;
+            display: none;
+        }
+        
+        .no-result.visible { display: block; }
+        
+        .no-result-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.6; }
+        .no-result-text { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
+        .no-result-hint { color: var(--subtext); margin-bottom: 1.5rem; }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+        
+        .suggestion-chip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.3rem;
+            border-radius: var(--radius-2xl);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all var(--transition-bounce);
+            color: var(--text);
+        }
+        
+        .suggestion-chip:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll to top - gold button */
+        .scroll-top {
+            position: fixed;
+            bottom: 5rem;
+            right: 1.5rem;
+            background: var(--accent);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-bounce);
+            border: none;
+            font-size: 1.3rem;
+            z-index: 30;
+        }
+        
+        .scroll-top.visible { display: flex; }
+        .scroll-top:hover { 
+            transform: translateY(-3px) scale(1.05);
+            background: var(--accent-dark);
+        }
+
+        /* WhatsApp button */
+        .wa-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 30;
+        }
+        
+        .wa-float {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--success);
+            padding: 0.7rem 1.3rem;
+            border-radius: var(--radius-2xl);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-bounce);
+        }
+        
+        .wa-float:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--success-dark);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--subtext);
+        }
+
+        /* Card animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card {
+            animation: fadeInUp 0.4s ease-out backwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .title { font-size: 1.2rem; gap: 0.3rem; }
+            .title-icon { font-size: 1.3rem; }
+            .title-gold { font-size: 0.8rem; }
+            .cards-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .container { padding: 0 1rem; margin: 1.5rem auto; }
+            .header { padding: 1rem 1rem 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+    <div class="header" id="header">
+        <div class="header-inner">
+            <div class="title">
+                <span>Cek Area XL Akrab</span>
+            </div>
+            <div class="search-area">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Cari provinsi atau kota..." autocomplete="off">
+                    <button class="search-clear" id="searchClear">✕</button>
+                </div>
+                <div class="search-shortcut" id="searchShortcut">⌨️ Tekan <kbd>Ctrl+/</kbd> untuk fokus pencarian</div>
+                <div class="popular-searches" id="popularSearches">
+                    <span class="popular-label">Populer:</span>
+                    <button class="popular-chip" data-search="jakarta">Jakarta</button>
+                    <button class="popular-chip" data-search="surabaya">Surabaya</button>
+                    <button class="popular-chip" data-search="bandung">Bandung</button>
+                    <button class="popular-chip" data-search="bali">Bali</button>
+                    <button class="popular-chip" data-search="medan">Medan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="error-message" id="errorMessage"></div>
+        <div class="results-count" id="resultsCount"></div>
+
+        <!-- skeleton loader -->
+        <div class="skeleton-grid" id="skeletonGrid">
+            <div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-badge"></div></div>
+            <div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-badge"></div></div>
+            <div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-badge"></div></div>
+            <div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-badge"></div></div>
+        </div>
+
+        <div id="dataContainer" class="cards-grid"></div>
+
+        <div class="no-result" id="noResult">
+            <div class="no-result-icon">🔍</div>
+            <div class="no-result-text">Wilayah tidak ditemukan</div>
+            <div class="no-result-hint">Coba kata kunci lain atau pilih saran di bawah</div>
+            <div class="suggestion-chips" id="suggestionChips"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 AXXO STORE</p>
+    </div>
+
+    <button class="scroll-top" id="scrollTopBtn">↑</button>
+
+    <div class="wa-container">
+        <a href="https://wa.me/6283865626030?text=Halo%20Admin,%20saya%20ingin%20order%20Paket%20XL%20Akrab" target="_blank" class="wa-float">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="white"><path d="M19.11 17.53c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.13-.13.27-.33.4-.5.14-.16.18-.27.27-.45.09-.18.05-.33-.02-.46-.07-.13-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46-.15 0-.33-.02-.5-.02-.17 0-.44.06-.67.31-.24.25-.9.88-.9 2.14 0 1.26.92 2.48 1.05 2.65.13.17 1.84 2.81 4.46 3.94.62.27 1.1.43 1.48.56.62.2 1.19.17 1.64.1.5-.08 1.54-.63 1.75-1.23.21-.6.21-1.12.15-1.23-.07-.11-.24-.17-.5-.3z"/></svg>
+            <span>Order via WA</span>
+        </a>
+    </div>
+
+    <script>
+        // ================= CONFIGURATION =================
+        const CONFIG = {
+            DATA_URL: 'data.json',
+            DEBOUNCE_DELAY: 250,
+            SCROLL_THRESHOLD: 10
+        };
+
+        // ================= STATE MANAGEMENT =================
+        let state = {
+            allData: [],
+            filteredData: [],
+            isLoading: true,
+            hasError: false,
+            searchQuery: ''
+        };
+
+        // DOM Elements
+        const elements = {
+            searchInput: document.getElementById('searchInput'),
+            searchClear: document.getElementById('searchClear'),
+            dataContainer: document.getElementById('dataContainer'),
+            noResult: document.getElementById('noResult'),
+            resultsCount: document.getElementById('resultsCount'),
+            skeletonGrid: document.getElementById('skeletonGrid'),
+            errorMessage: document.getElementById('errorMessage'),
+            header: document.getElementById('header'),
+            searchShortcut: document.getElementById('searchShortcut'),
+            scrollTopBtn: document.getElementById('scrollTopBtn'),
+            suggestionChips: document.getElementById('suggestionChips'),
+            popularChips: document.querySelectorAll('.popular-chip')
+        };
+
+        // ================= UTILITIES =================
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showError(message) {
+            elements.errorMessage.textContent = ` ${message}`;
+            elements.errorMessage.classList.add('visible');
+            state.hasError = true;
+        }
+
+        function hideError() {
+            elements.errorMessage.classList.remove('visible');
+            state.hasError = false;
+        }
+
+        function highlightText(text, keyword) {
+            if (!keyword || !keyword.trim()) return escapeHtml(text);
+            const sanitizedKeyword = keyword.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            if (sanitizedKeyword.length === 0) return escapeHtml(text);
+            const regex = new RegExp(`(${sanitizedKeyword})`, 'gi');
+            const escaped = escapeHtml(text);
+            return escaped.replace(regex, '<mark>$1</mark>');
+        }
+
+        function updateURLState(query) {
+            const url = new URL(window.location);
+            if (query) {
+                url.searchParams.set('q', query);
+            } else {
+                url.searchParams.delete('q');
+            }
+            window.history.pushState({}, '', url);
+        }
+
+        // ================= RENDER FUNCTION =================
+        function renderCards(data, keyword = '', isSearching = false) {
+            const container = elements.dataContainer;
+            container.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                elements.noResult.classList.add('visible');
+                elements.resultsCount.classList.remove('visible');
+                renderSuggestions(keyword);
+                return;
+            }
+
+            elements.noResult.classList.remove('visible');
+            
+            if (isSearching && keyword) {
+                elements.resultsCount.classList.add('visible');
+                elements.resultsCount.textContent = `⭐ Ditemukan ${data.length} hasil ⭐`;
+            } else {
+                elements.resultsCount.classList.remove('visible');
+            }
+
+            const fragment = document.createDocumentFragment();
+            
+            data.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'article');
+                card.setAttribute('aria-label', `${item.provinsi}, ${item.kota} - Area ${item.area}`);
+                
+                card.style.animationDelay = `${index * 0.03}s`;
+                
+                card.innerHTML = `
+                    <div class="provinsi">
+                        <span>${highlightText(item.provinsi, keyword)}</span>
+                        <span class="badge">${escapeHtml(item.area)}</span>
+                    </div>
+                    <div class="kota">${highlightText(item.kota, keyword)}</div>
+                `;
+                fragment.appendChild(card);
+            });
+            
+            container.appendChild(fragment);
+            hideError();
+        }
+
+        function renderSuggestions(keyword) {
+            if (!keyword) {
+                elements.suggestionChips.innerHTML = '';
+                return;
+            }
+            const suggestions = ['Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Bali', 'Yogyakarta', 'Semarang']
+                .filter(s => s.toLowerCase().includes(keyword.toLowerCase()))
+                .slice(0, 5);
+            
+            if (suggestions.length === 0) {
+                elements.suggestionChips.innerHTML = '';
+                return;
+            }
+            
+            elements.suggestionChips.innerHTML = suggestions.map(s => 
+                `<button class="suggestion-chip" data-suggestion="${escapeHtml(s)}">⭐ ${escapeHtml(s)} ⭐</button>`
+            ).join('');
+            
+            document.querySelectorAll('.suggestion-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    elements.searchInput.value = chip.dataset.suggestion;
+                    updateSearchQuery(chip.dataset.suggestion);
+                });
+            });
+        }
+
+        // ================= FILTER & SEARCH =================
+        function filterAndRender() {
+            const keyword = state.searchQuery.trim().toLowerCase();
+            const isSearching = keyword.length > 0;
+            
+            let filtered = state.allData;
+            
+            if (isSearching) {
+                filtered = state.allData.filter(item => 
+                    item.provinsi.toLowerCase().includes(keyword) ||
+                    item.kota.toLowerCase().includes(keyword)
+                );
+            }
+            
+            if (!isSearching) {
+                renderCards(state.allData, '', false);
+                elements.searchClear.classList.remove('visible');
+            } else {
+                elements.searchClear.classList.add('visible');
+                renderCards(filtered, keyword, true);
+            }
+        }
+
+        function updateSearchQuery(value) {
+            state.searchQuery = value;
+            filterAndRender();
+            updateURLState(value);
+        }
+
+        // ================= DEBOUNCE =================
+        function debounce(func, delay) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // ================= EVENT HANDLERS =================
+        const handleSearchInput = debounce((event) => {
+            updateSearchQuery(event.target.value);
+        }, CONFIG.DEBOUNCE_DELAY);
+
+        function clearSearch() {
+            elements.searchInput.value = '';
+            updateSearchQuery('');
+            elements.searchInput.focus();
+        }
+
+        function initSearchListeners() {
+            elements.searchInput.addEventListener('input', handleSearchInput);
+            elements.searchClear.addEventListener('click', clearSearch);
+            
+            elements.searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    clearSearch();
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+                    e.preventDefault();
+                    elements.searchInput.focus();
+                }
+            });
+            
+            elements.popularChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    elements.searchInput.value = chip.dataset.search;
+                    updateSearchQuery(chip.dataset.search);
+                });
+            });
+        }
+
+        // ================= DATA LOADING =================
+        function showSkeleton() {
+            elements.skeletonGrid.style.display = 'grid';
+            elements.dataContainer.style.display = 'none';
+        }
+
+        function hideSkeleton() {
+            elements.skeletonGrid.style.display = 'none';
+            elements.dataContainer.style.display = 'grid';
+        }
+
+        async function loadData() {
+            try {
+                showSkeleton();
+                hideError();
+                
+                const url = `${CONFIG.DATA_URL}?t=${Date.now()}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!Array.isArray(data)) {
+                    throw new Error('Format data tidak valid (bukan array)');
+                }
+                
+                if (data.length === 0) {
+                    throw new Error('Data kosong');
+                }
+                
+                const isValid = data.every(item => 
+                    item && typeof item.provinsi === 'string' && 
+                    typeof item.kota === 'string' && 
+                    typeof item.area === 'string'
+                );
+                
+                if (!isValid) {
+                    throw new Error('Beberapa data memiliki format yang tidak sesuai');
+                }
+                
+                state.allData = data;
+                state.isLoading = false;
+                
+                hideSkeleton();
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlQuery = urlParams.get('q');
+                if (urlQuery) {
+                    elements.searchInput.value = urlQuery;
+                    updateSearchQuery(urlQuery);
+                } else {
+                    renderCards(data, '', false);
+                }
+                
+                initSearchListeners();
+                
+            } catch (error) {
+                state.isLoading = false;
+                hideSkeleton();
+                console.error('Error loading coverage data:', error);
+                showError(`Gagal memuat data coverage. ${error.message}. Silakan refresh halaman.`);
+                elements.dataContainer.innerHTML = '';
+                elements.noResult.classList.add('visible');
+                if (elements.noResult.querySelector('.no-result-text')) {
+                    elements.noResult.querySelector('.no-result-text').textContent = 'Gagal memuat data';
+                    elements.noResult.querySelector('.no-result-hint').textContent = 'Periksa koneksi internet atau coba lagi nanti';
+                }
+            }
+        }
+
+        // ================= SCROLL EFFECTS =================
+        let scrollTimeout;
+        function handleScroll() {
+            if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+            scrollTimeout = requestAnimationFrame(() => {
+                const isScrolled = window.scrollY > CONFIG.SCROLL_THRESHOLD;
+                elements.header.classList.toggle('scrolled', isScrolled);
+                elements.scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ================= DEVICE DETECTION =================
+        function isDesktopDevice() {
+            const minWidth = 768;
+            const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            const isLargeScreen = window.innerWidth >= minWidth;
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            return (isLargeScreen && hasHover) || (isLargeScreen && !isTouchDevice);
+        }
+
+        function toggleShortcutVisibility() {
+            if (elements.searchShortcut) {
+                elements.searchShortcut.style.display = isDesktopDevice() ? 'block' : 'none';
+            }
+        }
+
+        let resizeTimeout;
+        function handleResize() {
+            if (resizeTimeout) clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                toggleShortcutVisibility();
+            }, 150);
+        }
+
+        // ================= PULL TO REFRESH =================
+        let touchStartY = 0;
+        let isRefreshing = false;
+        
+        function handleTouchStart(e) {
+            if (window.scrollY === 0) {
+                touchStartY = e.touches[0].clientY;
+            }
+        }
+        
+        function handleTouchMove(e) {
+            if (touchStartY === 0) return;
+            const touchY = e.touches[0].clientY;
+            const diff = touchY - touchStartY;
+            if (diff > 60 && !isRefreshing && window.scrollY === 0) {
+                isRefreshing = true;
+                location.reload();
+            }
+        }
+        
+        function initPullToRefresh() {
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchmove', handleTouchMove, { passive: true });
+        }
+
+        // ================= INITIALIZATION =================
+        function init() {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('resize', handleResize);
+            window.addEventListener('orientationchange', handleResize);
+            elements.scrollTopBtn.addEventListener('click', scrollToTop);
+            
+            toggleShortcutVisibility();
+            initPullToRefresh();
+            
+            loadData();
+        }
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlQuery = urlParams.get('q') || '';
+            elements.searchInput.value = urlQuery;
+            updateSearchQuery(urlQuery);
+        });
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
